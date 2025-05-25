@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: loginweb
+      MYSQL_USER: webuser
+      MYSQL_PASSWORD: webpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: loginwebapp
+    depends_on:
+      - db
+    ports:
+      - "7071:7071"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: webuser
+      DB_PASS: webpass
