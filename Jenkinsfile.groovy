@@ -1,8 +1,7 @@
 pipeline {
     agent {
-        label 'linux'  // Use a Linux-based agent with Docker, Terraform, AWS CLI installed
-    }
-
+    label 'linux'
+}
     environment {
         AWS_REGION = 'us-east-1'
         ECR_REPO = 'loginwebapp-ecr'
