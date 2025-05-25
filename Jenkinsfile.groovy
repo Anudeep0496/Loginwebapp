@@ -4,12 +4,19 @@ pipeline {
     environment {
         AWS_REGION = 'us-east-1'
         ECR_REPO = 'loginwebapp-ecr'
-        IMAGE_TAG = "${env.BUILD_NUMBER}"
         AWS_ACCOUNT_ID = '105306707871'
         TERRAFORM_DIR = './terraform'
     }
 
     stages {
+        stage('Set IMAGE_TAG') {
+            steps {
+                script {
+                    env.IMAGE_TAG = env.BUILD_NUMBER
+                }
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
