@@ -11,6 +11,7 @@ pipeline {
       steps {
         bat 'docker --version'
       }
+    }
         stage('Login to AWS ECR') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'aws-credentials', 
