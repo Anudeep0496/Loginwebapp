@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-    label 'linux'
-}
+    agent any
     environment {
         AWS_REGION = 'us-east-1'
         ECR_REPO = 'loginwebapp-ecr'
